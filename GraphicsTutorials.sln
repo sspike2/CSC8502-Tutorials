@@ -8,8 +8,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics Coursework", "Graphics Coursework", "{B12FA29E-1613-4E55-9C1D-B7DCD8A760D8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 01 - Your First Triangle", "1) Your First Triangle\Tutorial1.vcxproj", "{061C02AD-EAAA-4BB1-9D23-1B1E55D0E924}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 02 - Matrix transformations", "2) Matrix Transformations\Tutorial2.vcxproj", "{C5675B01-9FCD-47D7-BBCB-AC54444DFAF9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 03 - Texturing", "3) Texturing\Tutorial3.vcxproj", "{67A58E4E-A392-4FFF-9D65-F24BEEB0EC77}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -17,18 +23,39 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 03 - Texturing", "
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 04 - Depth and Transparency", "4) Depth & Transparency\Tutorial4.vcxproj", "{45EBBBBF-1252-40BA-8C99-68085713A623}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 05 - Scissors and Stencils", "5) Stencils & Scissors\Tutorial5.vcxproj", "{E32F8803-372F-4674-A0E7-11E0FECF4B87}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 06 - Scene Graph", "6) Scene Graph\Tutorial6.vcxproj", "{52CBA66E-8806-488E-9C6C-E0BBDEECFC2E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 07 - Scene Management", "7) Scene Management\Tutorial7.vcxproj", "{87B5801E-F373-4FD4-9CD4-A75E3B14039D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 08 - Index Buffers", "8) Index Buffers\Tutorial8.vcxproj", "{5844D912-7DC1-4A49-9F98-F7FE1C053563}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 09 - Skeletal Animation", "9) Skeletal Animation\Tutorial9.vcxproj", "{9FB8682D-BD52-4B33-B37D-D6C2141B67DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 10 - Post Processing", "10) Post Processing\Tutorial10.vcxproj", "{9D4EB641-9F16-458C-AA69-448DA2C2464E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98D6B51B-CB0A-4389-ADC6-24082B967C3F} = {98D6B51B-CB0A-4389-ADC6-24082B967C3F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 11 - Real-time Lighting A", "11) Per Fragment Lighting A\Tutorial11.vcxproj", "{95F93172-8DC5-4E52-80B6-0D56624BD569}"
 EndProject
