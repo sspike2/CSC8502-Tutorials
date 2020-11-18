@@ -51,8 +51,10 @@ public:
 
 	void Draw();
 	void DrawSubMesh(int i);
-	static Mesh * GenerateTriangle ();
 
+	static Mesh* GenerateTriangle ();
+	static Mesh* GenerateQuad ();
+	
 	static Mesh* LoadFromMeshFile(const std::string& name);
 
 	unsigned int GetTriCount() const {
