@@ -241,6 +241,23 @@ void OGLRenderer::UpdateShaderMatrices()
 	}
 }
 
+
+void OGLRenderer::SetShaderLight(const Light& l)
+{
+
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightPos"), 1, (float*)&l.GetPosition());
+
+	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightColour"), 1, (float*)&l.GetColour());
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"lightRadius"), l.GetRadius());
+}
+
+
+
+
 void OGLRenderer::BindShader(Shader* s)
 {
 	currentShader = s;

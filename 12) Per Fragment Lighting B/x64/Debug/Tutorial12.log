@@ -1,0 +1,8 @@
+﻿  Renderer.cpp
+  Tutorial12.cpp
+  Generating Code...
+nclgl.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(stb_image_aug.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(SOIL.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_helper.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_DXT.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+  Tutorial12.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.exe

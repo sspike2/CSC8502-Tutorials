@@ -1,0 +1,8 @@
+﻿  Renderer.cpp
+D:\cpp projects\CSC8502-Tutorials\15) Deferred Shading\Renderer.cpp(31,11): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\15) Deferred Shading\Renderer.cpp(29,32): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+nclgl.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(stb_image_aug.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(SOIL.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_helper.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_DXT.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+  Tutorial15.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 15 - Deferred Shading.exe

@@ -1,0 +1,6 @@
+﻿  BlankProject.cpp
+  Renderer.cpp
+D:\cpp projects\CSC8502-Tutorials\Blank Project\Renderer.cpp(31,11): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\Blank Project\Renderer.cpp(29,32): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  Generating Code...
+  BlankProject.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\Blank Project.exe

@@ -1,0 +1,2 @@
+﻿  tutorial1.cpp
+D:\cpp projects\CSC8502-Tutorials\1) Your First Triangle\tutorial1.cpp(2,10): fatal error C1083: Cannot open include file: 'Renderer.h': No such file or directory

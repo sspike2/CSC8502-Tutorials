@@ -1,0 +1,9 @@
+﻿  Renderer.cpp
+D:\cpp projects\CSC8502-Tutorials\9) Skeletal Animation\Renderer.cpp(81,31): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  Tutorial9.cpp
+  Generating Code...
+nclgl.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(stb_image_aug.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(SOIL.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_helper.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+nclgl.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_DXT.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
+  Tutorial9.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 09 - Skeletal Animation.exe

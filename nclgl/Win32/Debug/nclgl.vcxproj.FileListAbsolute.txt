@@ -1,0 +1,2 @@
+D:\cpp projects\CSC8502-Tutorials\Win32\Debug\nclgl.pdb
+D:\cpp projects\CSC8502-Tutorials\nclgl\Win32\Debug\nclgl.pdb

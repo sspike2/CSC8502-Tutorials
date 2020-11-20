@@ -25,30 +25,29 @@ void Camera::UpdateCamera(float dt)
 	Vector3 forward = rotation * Vector3(0, 0, -1);
 	Vector3 right = rotation * Vector3(1, 0, 0);
 
-	float speed = 30.0f * dt;
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_W))
 	{
-		position += forward * speed;
+		position += forward * (speed * dt);
 	}
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_S))
 	{
-		position -= forward * speed;
+		position -= forward * (speed * dt);
 	}
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_A))
 	{
-		position -= right * speed;
+		position -= right * (speed * dt);
 	}
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_D))
 	{
-		position += right * speed;
+		position += right * (speed * dt);
 	}
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_SHIFT))
 	{
-		position.y += speed;
+		position.y += (speed * dt);
 	}
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_SPACE))
 	{
-		position.y -= speed;
+		position.y -= (speed * dt);
 	}
 }
 Matrix4 Camera::BuildViewMatrix()

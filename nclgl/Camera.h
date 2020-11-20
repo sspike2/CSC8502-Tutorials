@@ -11,11 +11,12 @@ public:
 		pitch = 0.0f;
 	};
 
-	Camera(float pitch, float yaw, Vector3 position)
+	Camera(float pitch, float yaw, Vector3 position, float speed)
 	{
 		this->pitch = pitch;
 		this->yaw = yaw;
 		this->position = position;
+		this->speed = speed;
 	}
 
 	~Camera(void) {};
@@ -37,4 +38,5 @@ protected:
 	float yaw;
 	float pitch;
 	Vector3 position; // Set to 0,0,0 by Vector3 constructor ;)
+	float speed;
 };
