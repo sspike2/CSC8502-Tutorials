@@ -32,4 +32,4 @@ in Vertex {
  fragColour . rgb += ( lightColour . rgb * specFactor )* attenuation *0.33;
  fragColour . rgb += surface * 0.1f ; // ambient !
  fragColour . a = diffuse . a ;
- }
+ }

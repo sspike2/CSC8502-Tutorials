@@ -1,8 +1,9 @@
 #include "Renderer.h"
-#include "Renderer.h"
+
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
 	heightMap = new HeightMap(TEXTUREDIR "noise.png");
+
 	texture = SOIL_load_OGL_texture(
 		TEXTUREDIR "Barren Reds.JPG", SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
@@ -28,7 +29,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	Vector3 heightmapSize = heightMap->GetHeightmapSize();
 
 	camera = new Camera(-45.0f, 0.0f,
-		heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
+		heightmapSize * Vector3(0.5f, 5.0f, 0.5f),50);
 	light = new Light(heightmapSize * Vector3(0.5f, 1.5f, 0.5f),
 		Vector4(1, 1, 0, 1), heightmapSize.x * 0.5f);
 

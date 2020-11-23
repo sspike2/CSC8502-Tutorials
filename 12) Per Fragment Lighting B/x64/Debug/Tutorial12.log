@@ -1,8 +1,7 @@
-﻿  Renderer.cpp
-  Tutorial12.cpp
-  Generating Code...
-nclgl.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(stb_image_aug.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
-nclgl.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(SOIL.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
-nclgl.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_helper.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
-nclgl.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'nclgl.lib(image_DXT.obj)' or at 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\SOIL.pdb'; linking object as if no debug info
-  Tutorial12.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.exe
+﻿  Microsoft (R) Incremental Linker Version 14.27.29112.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  "/OUT:D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.exe" /INCREMENTAL /NOLOGO nclgl.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK "/PDB:D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.pdb" "/PGD:D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.pgd" /LTCG:PGOptimize /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.lib" /MACHINE:X64 x64\Debug\Renderer.obj 
+  x64\Debug\Tutorial12.obj 
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(876,5): error MSB6006: "link.exe" exited with code 1266.
+LINK : fatal error LNK1266: error reading instrumentation file 'D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 12 - Real-time Lighting B.pgd'; File not found

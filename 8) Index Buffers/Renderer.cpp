@@ -3,7 +3,7 @@
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
 	heightMap = new HeightMap(TEXTUREDIR "noise.png");
-	camera = new Camera(-40, 270, Vector3(-2100, 3300, 2000));
+	camera = new Camera(-40, 270, Vector3(-2100, 3300, 2000),50);
 
 	shader = new Shader("TexturedVertex.glsl", "TexturedFragment.glsl");
 

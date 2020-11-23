@@ -6,13 +6,14 @@ int main() {
 	if(!w.HasInitialised()) {
 		return -1;
 	}
-	
+
 	Renderer renderer(w);	//This handles all the boring OGL 3.2 initialisation stuff, and sets up our tutorial!
 	if(!renderer.HasInitialised()) {
 		return -1;
 	}
 
 	float rotate = 0.0f;
+	float tiling = 0.01f;
 	while(w.UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
 		if(Window::GetKeyboard()->KeyDown(KEYBOARD_LEFT) ) {
 			--rotate;
@@ -23,6 +24,17 @@ int main() {
 			++rotate;
 			renderer.UpdateTextureMatrix(rotate);
 		}
+
+		if(Window::GetKeyboard()->KeyDown(KEYBOARD_UP) ) {
+			//--tiling;
+			renderer.UpdateTextureMatrixTiling(tiling);
+		}
+
+		if(Window::GetKeyboard()->KeyDown(KEYBOARD_DOWN) ) {
+			//++tiling;
+			renderer.UpdateTextureMatrixTiling(-tiling);
+		}
+
 
 		if(Window::GetKeyboard()->KeyTriggered(KEYBOARD_1) ) {
 			renderer.ToggleFiltering();

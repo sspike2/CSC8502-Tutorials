@@ -5,7 +5,7 @@
 
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
-	camera = new Camera(0.0f, 0.0f, (Vector3(0, 100, 750.0f)));
+	camera = new Camera(0.0f, 0.0f, (Vector3(0, 100, 750.0f)),50);
 	quad = Mesh::GenerateQuad();
 	cube = Mesh::LoadFromMeshFile("OffsetCubeY.msh");
 
@@ -27,7 +27,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		s->SetColour(Vector4(1.0f, 1.0f, 1.0f, 0.5f));
 		s->SetTransform(Matrix4::Translation(
 			Vector3(0, 100.0f, -300.0f + 100.0f + 100 * i)));
-		s->SetModelScale(Vector3(100.0f, 100.0f, 100.0f));
+		s->SetModelScale(Vector3(1000.0f, 1000.0f, 100.0f));
 		s->SetBoundingRadius(100.0f);
 		s->SetMesh(quad);
 		s->SetTexture(texture);
@@ -62,7 +62,7 @@ void Renderer::UpdateScene(float dt)
 {
 	camera->UpdateCamera(dt);
 	viewMatrix = camera->BuildViewMatrix();
-	frameFrustum.FromMatrix(projMatrix * viewMatrix);
+	//frameFrustum.FromMatrix(projMatrix * viewMatrix);
 
 	root->Update(dt);
 
@@ -70,7 +70,7 @@ void Renderer::UpdateScene(float dt)
 
 void Renderer::BuildNodeLists(SceneNode* from)
 {
-	if (frameFrustum.InsideFrustum(*from))
+	//if (frameFrustum.InsideFrustum(*from))
 	{
 		Vector3 dir = from->GetWorldTransform().GetPositionVector() -
 			camera->GetPosition();
@@ -96,7 +96,6 @@ void Renderer::BuildNodeLists(SceneNode* from)
 		BuildNodeLists((*i));
 
 	}
-
 }
 
 
@@ -150,7 +149,6 @@ void Renderer::DrawNode(SceneNode* n)
 		n->Draw(*this);
 
 	}
-
 }
 
 

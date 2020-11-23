@@ -29,7 +29,7 @@ protected:
 	Shader* shader;
 	GLuint texture;
 
-	Frustum frameFrustum;
+	//Frustum frameFrustum;
 
 	vector < SceneNode*> transparentNodeList;
 	vector < SceneNode*> nodeList;

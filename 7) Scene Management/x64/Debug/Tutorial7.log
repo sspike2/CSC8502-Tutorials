@@ -1,0 +1,5 @@
+﻿Tutorial7.obj : error LNK2019: unresolved external symbol "public: __cdecl Renderer::Renderer(class Window &)" (??0Renderer@@QEAA@AEAVWindow@@@Z) referenced in function main
+Tutorial7.obj : error LNK2019: unresolved external symbol "public: virtual __cdecl Renderer::~Renderer(void)" (??1Renderer@@UEAA@XZ) referenced in function main
+Tutorial7.obj : error LNK2019: unresolved external symbol "public: virtual void __cdecl Renderer::UpdateScene(float)" (?UpdateScene@Renderer@@UEAAXM@Z) referenced in function main
+Tutorial7.obj : error LNK2019: unresolved external symbol "public: virtual void __cdecl Renderer::RenderScene(void)" (?RenderScene@Renderer@@UEAAXXZ) referenced in function main
+D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 07 - Scene Management.exe : fatal error LNK1120: 4 unresolved externals

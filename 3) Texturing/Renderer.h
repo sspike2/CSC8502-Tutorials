@@ -11,6 +11,7 @@ public:
 	virtual void RenderScene();
 
 	void UpdateTextureMatrix(float rotation);
+	void UpdateTextureMatrixTiling(float value);
 	void ToggleRepeating();
 	void ToggleFiltering();
 protected:

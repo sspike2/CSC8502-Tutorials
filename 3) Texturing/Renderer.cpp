@@ -46,6 +46,12 @@ void Renderer::UpdateTextureMatrix(float value)
 	Matrix4 rotation = Matrix4::Rotation(value, Vector3(0, 0, 1));
 	textureMatrix = pop * rotation * push;
 }
+
+void Renderer::UpdateTextureMatrixTiling(float value)
+{
+	Vector3 scale = textureMatrix.GetScalingVector();
+	textureMatrix.SetScalingVector(Vector3(scale.x + value, scale.y + value, scale.z + value));
+}
 void Renderer::ToggleRepeating()
 {
 	repeating = !repeating;
@@ -57,7 +63,7 @@ void Renderer::ToggleFiltering()
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
 		filtering ? GL_LINEAR : GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-		filtering ? GL_LINEAR : GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+	//	filtering ? GL_LINEAR : GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

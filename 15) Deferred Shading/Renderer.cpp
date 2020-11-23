@@ -223,7 +223,6 @@ void Renderer::DrawPointLights()
 	glDepthMask(GL_TRUE);
 
 	glClearColor(0.2f, 0.2f, 0.2f, 1);
-
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 void Renderer::CombineBuffers()
