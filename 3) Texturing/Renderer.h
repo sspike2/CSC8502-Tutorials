@@ -14,10 +14,18 @@ public:
 	void UpdateTextureMatrixTiling(float value);
 	void ToggleRepeating();
 	void ToggleFiltering();
+	void ToggleBlendMode();
+
 protected:
 	Shader* shader;
 	Mesh* triangle;
 	GLuint texture;
+	GLuint bump;
+	GLuint AlphaTex;
+
 	bool filtering;
 	bool repeating;
+	int blendMode;
+
+
 };

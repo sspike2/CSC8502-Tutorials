@@ -175,6 +175,22 @@ void OGLRenderer::SetTextureRepeating(GLuint target, bool repeating)
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void OGLRenderer::SetTextureRepeating(GLuint target, bool repeating, bool isHorizontalAxis)
+{
+	glBindTexture(GL_TEXTURE_2D, target);
+	if (isHorizontalAxis)
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
+			repeating ? GL_REPEAT : GL_CLAMP);
+	}
+	else
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
+			repeating ? GL_REPEAT : GL_CLAMP);
+	}
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 /*
 Returns TRUE if everything in the constructor has gone to plan.
 Check this to end the application if necessary...
@@ -244,6 +260,7 @@ void OGLRenderer::UpdateShaderMatrices()
 
 void OGLRenderer::SetShaderLight(const Light& l)
 {
+	
 
 	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
 		"lightPos"), 1, (float*)&l.GetPosition());
@@ -253,7 +270,30 @@ void OGLRenderer::SetShaderLight(const Light& l)
 
 	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
 		"lightRadius"), l.GetRadius());
+
+
+	
+
 }
+void OGLRenderer::SetDirectionalLight(const Vector3* direction, const Light& l)
+{
+
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightPos"), 1, (float*)&l.GetPosition());
+
+	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightColour"), 1, (float*)&l.GetColour());
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"lightRadius"), l.GetRadius());
+
+
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(), "lightDirection"), 
+		1, (float*)direction);
+
+}
+
+
 
 
 
@@ -309,8 +349,26 @@ void OGLRenderer::DebugCallback(GLenum source, GLenum type, GLuint id, GLenum se
 
 	std::cout << "OpenGL Debug Output: " + sourceName + ", " + typeName + ", " + severityName + ", " + string(message) << "\n";
 }
-#endif
 
+bool OGLRenderer::SetTextureToShader(GLuint texID, GLuint unit, const std::string& uniformName, Shader* s) {
+
+	GLint uniformID = glGetUniformLocation(s->GetProgram(), uniformName.c_str());
+	if (uniformID < 0) {
+		std::cout << "Trying to bind invalid 2D texture uniform!\n"; //Put breakpoint on this!
+		return false;
+	}
+	//You'll need to make 'currentShader' protected instead of private for this check...
+	if (currentShader != s) {
+		std::cout << "Trying to set shader uniform on wrong shader!\n"; //Put breakpoint on this!
+		return false;
+	}
+	glActiveTexture(GL_TEXTURE0 + unit); //A neat trick!
+	glBindTexture(GL_TEXTURE_2D, texID);
+	glUniform1i(uniformID, unit);
+	return true;
+}
+
+#endif
 
 
 

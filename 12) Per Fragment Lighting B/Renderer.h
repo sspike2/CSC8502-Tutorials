@@ -23,6 +23,9 @@ protected:
 	Shader* shader;
 	Camera* camera;
 	Light* light; //A new thing !
+	Light* newLight;
 	GLuint texture;
 	GLuint bumpmap; // but we need this line added !
+
+	Mesh* sphere; // Light volume
 };

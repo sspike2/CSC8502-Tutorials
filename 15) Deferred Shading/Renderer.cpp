@@ -30,16 +30,26 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 			150.0f,
 			rand() % (int)heightmapSize.z));
 
+		//l.SetColour(Vector4(1, 0, 0, 1));
+
 		l.SetColour(Vector4(0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX),
 			1));
-		l.SetRadius(250.0f + (rand() % 250));
+
+
+		l.SetRadius(500.0f + (rand() % 250));
 	}
 	sceneShader = new Shader("bumpvertex.glsl", // reused !
 		"bufferFragment.glsl");
+
+	//sceneShader = new Shader("directionalVertex(2).glsl", // reused !
+		//"directionalFragment(2).glsl");
+
+
 	pointlightShader = new Shader("pointlightvertex.glsl",
 		"pointlightfragment.glsl");
+
 	combineShader = new Shader("combinevert.glsl",
 		"combinefrag.glsl");
 
@@ -55,8 +65,8 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	glGenFramebuffers(1, &pointLightFBO);
 
 	GLenum buffers[2] = {
-	GL_COLOR_ATTACHMENT0 ,
-	GL_COLOR_ATTACHMENT1
+		GL_COLOR_ATTACHMENT0 ,
+		GL_COLOR_ATTACHMENT1
 	};
 	// Generate our scene depth texture...
 	GenerateScreenTexture(bufferDepthTex, true);
@@ -159,6 +169,13 @@ void Renderer::FillBuffers()
 	glUniform1i(
 		glGetUniformLocation(sceneShader->GetProgram(), "bumpTex"), 1);
 
+	//glUnifor
+	glUniform3fv(glGetUniformLocation(sceneShader->GetProgram(),
+		"cameraPos"), 1, (float*)&camera->GetPosition());
+
+
+
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, earthTex);
 
@@ -170,9 +187,25 @@ void Renderer::FillBuffers()
 	projMatrix = Matrix4::Perspective(1.0f, 10000.0f,
 		(float)width / (float)height, 45.0f);
 
+
+
+
 	UpdateShaderMatrices();
 
 	heightMap->Draw();
+
+	//Light* dirLight = new Light[1];
+
+	//dirLight[0].SetPosition(Vector3(0, 1000, 0));
+	//dirLight[0].SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+	////dirLight[0].SetRadius(250.0f + (rand() % 250));
+	//SetShaderLight(dirLight[0]);
+
+	//Light* light = new Light( Vector3(0.5f, 1000.5f, 0.5f),
+	//	Vector4(1, 1, 1, 1),  0.5f);
+	//SetShaderLight(*light);
+
+
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -187,6 +220,13 @@ void Renderer::DrawPointLights()
 	glCullFace(GL_FRONT);
 	glDepthFunc(GL_ALWAYS);
 	glDepthMask(GL_FALSE);
+
+
+
+
+
+
+
 
 	glUniform1i(glGetUniformLocation(
 		pointlightShader->GetProgram(), "depthTex"), 0);
@@ -209,6 +249,20 @@ void Renderer::DrawPointLights()
 		pointlightShader->GetProgram(), "inverseProjView"),
 		1, false, invViewProj.values);
 	UpdateShaderMatrices();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	for (int i = 0; i < LIGHT_NUM; ++i)
 	{
 		Light& l = pointLights[i];
@@ -223,6 +277,7 @@ void Renderer::DrawPointLights()
 	glDepthMask(GL_TRUE);
 
 	glClearColor(0.2f, 0.2f, 0.2f, 1);
+
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 void Renderer::CombineBuffers()

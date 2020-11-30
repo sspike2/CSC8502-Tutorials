@@ -5,7 +5,7 @@
 
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
-	camera = new Camera(0.0f, 0.0f, (Vector3(0, 100, 750.0f)),50);
+	camera = new Camera(0.0f, 0.0f, (Vector3(0, 100, 750.0f)), 50);
 	quad = Mesh::GenerateQuad();
 	cube = Mesh::LoadFromMeshFile("OffsetCubeY.msh");
 
@@ -13,6 +13,10 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 
 	texture = SOIL_load_OGL_texture(TEXTUREDIR "stainedglass.tga",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
+
+
+	SetTextureRepeating(texture, true);
+	//setTextureF
 
 	if (!shader->LoadSuccess() || !texture)
 	{
@@ -27,10 +31,11 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		s->SetColour(Vector4(1.0f, 1.0f, 1.0f, 0.5f));
 		s->SetTransform(Matrix4::Translation(
 			Vector3(0, 100.0f, -300.0f + 100.0f + 100 * i)));
-		s->SetModelScale(Vector3(1000.0f, 1000.0f, 100.0f));
+		s->SetModelScale(Vector3(100.0f, 100.0f, 100.0f));
 		s->SetBoundingRadius(100.0f);
 		s->SetMesh(quad);
 		s->SetTexture(texture);
+		s->SetTextureMatrix(Matrix4::Scale(Vector3(10, 10, 10)));
 		root->AddChild(s);
 	}
 
@@ -132,12 +137,19 @@ void Renderer::DrawNode(SceneNode* n)
 	{
 		Matrix4 model = n->GetWorldTransform() *
 			Matrix4::Scale(n->GetModelScale());
+
 		glUniformMatrix4fv(
 			glGetUniformLocation(shader->GetProgram(),
 				"modelMatrix"), 1, false, model.values);
 
 		glUniform4fv(glGetUniformLocation(shader->GetProgram(),
 			"nodeColour"), 1, (float*)&n->GetColour());
+
+		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(),
+			"textureMatrix"), 1, false, n->GetTextureMatrix().values);
+
+
+
 
 		texture = n->GetTexture();
 		glActiveTexture(GL_TEXTURE0);
@@ -164,6 +176,8 @@ void Renderer::RenderScene()
 
 	glUniform1i(glGetUniformLocation(shader->GetProgram(),
 		"diffuseTex"), 0);
+
+
 	DrawNodes();
 
 	ClearNodeLists();

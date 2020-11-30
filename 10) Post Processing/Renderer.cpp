@@ -3,8 +3,9 @@ const int POST_PASSES = 10;
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
 	camera = new Camera(-25.0f, 225.0f,
-		Vector3(-150.0f, 250.0f, -150.0f));
+		Vector3(-150.0f, 250.0f, -150.0f), 300);
 	quad = Mesh::GenerateQuad();
+
 
 	heightMap = new HeightMap(TEXTUREDIR "noise.png");
 	heightTexture =
@@ -50,6 +51,8 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
 		GL_TEXTURE_2D, bufferDepthTex, 0);
+
+
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT,
 		GL_TEXTURE_2D, bufferDepthTex, 0);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
@@ -109,6 +112,9 @@ void Renderer::DrawScene()
 	glBindTexture(GL_TEXTURE_2D, heightTexture);
 	heightMap->Draw();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	//actualDepthTex =
+
 }
 
 void Renderer::DrawPostProcess()
@@ -116,7 +122,14 @@ void Renderer::DrawPostProcess()
 	glBindFramebuffer(GL_FRAMEBUFFER, processFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
 		GL_TEXTURE_2D, bufferColourTex[1], 0);
+
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH, GL_TEXTURE_2D,
+		bufferDepthTex, 0);
+
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+	glUniform1i(glGetUniformLocation(processShader->GetProgram(),
+		"bufferDepthTex"), bufferDepthTex);
 
 	BindShader(processShader);
 	modelMatrix.ToIdentity();
@@ -129,6 +142,10 @@ void Renderer::DrawPostProcess()
 	glActiveTexture(GL_TEXTURE0);
 	glUniform1i(glGetUniformLocation(
 		processShader->GetProgram(), "sceneTex"), 0);
+
+
+
+
 	for (int i = 0; i < POST_PASSES; ++i)
 	{
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
@@ -140,7 +157,7 @@ void Renderer::DrawPostProcess()
 		quad->Draw();
 		// Now to swap the colour buffers , and do the second blur pass
 		glUniform1i(glGetUniformLocation(processShader->GetProgram(),
-			"isHorizontal"), 1);
+			"isVertical"), 1);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
 			GL_TEXTURE_2D, bufferColourTex[0], 0);
 		glBindTexture(GL_TEXTURE_2D, bufferColourTex[1]);
@@ -163,4 +180,8 @@ void Renderer::PresentScene()
 	glUniform1i(glGetUniformLocation(
 		sceneShader->GetProgram(), "diffuseTex"), 0);
 	quad->Draw();
+
+
+
+	//quad2->Draw();
 }

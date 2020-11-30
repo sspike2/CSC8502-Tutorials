@@ -1,0 +1,19 @@
+﻿  Renderer.cpp
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(51,11): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(49,32): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(476,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(480,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(481,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(486,61): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(495,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(496,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(500,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(501,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(525,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(529,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(530,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(544,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(545,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(549,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\cpp projects\CSC8502-Tutorials\emissiontest\Renderer.cpp(550,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  emissiontest.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\emissiontest.exe

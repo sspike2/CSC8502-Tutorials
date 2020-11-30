@@ -1,2 +1,3 @@
-﻿  tutorial14.cpp
+﻿  Renderer.cpp
+D:\cpp projects\CSC8502-Tutorials\14) Shadow Mapping\Renderer.cpp(76,27): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   tutorial14.vcxproj -> D:\cpp projects\CSC8502-Tutorials\x64\Debug\Tutorial 14 - Shadow Mapping.exe

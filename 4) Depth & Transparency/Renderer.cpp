@@ -12,6 +12,11 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		TEXTUREDIR "stainedglass.tga",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 
+	textures[2] = SOIL_load_OGL_texture(
+		TEXTUREDIR "stainedglass.tga",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
+
+
 	if (!textures[0] || !textures[1])
 	{
 		return;

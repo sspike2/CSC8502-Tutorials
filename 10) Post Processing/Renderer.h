@@ -26,6 +26,9 @@ protected:
 	Camera* camera;
 
 	Mesh* quad;
+
+	Mesh* quad2;
+
 	HeightMap* heightMap;
 	GLuint heightTexture;
 	GLuint bufferFBO;
@@ -33,5 +36,7 @@ protected:
 	GLuint bufferColourTex[2];
 	GLuint bufferDepthTex;
 
+
+	GLuint actualDepthTex;
 
 };

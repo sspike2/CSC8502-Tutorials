@@ -8,7 +8,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 
 	projMatrix = Matrix4::Perspective(1.0f, 10000.0f,
 		(float)width / (float)height, 45.0f);
-	camera = new Camera(-3, 0.0f, Vector3(0, 1.40f, 4.40f));
+	camera = new Camera(-3, 0.0f, Vector3(0, 1.40f, 4.40f),100);
 
 	shader = new Shader("SkinningVertex.glsl", "texturedFragment.glsl");
 

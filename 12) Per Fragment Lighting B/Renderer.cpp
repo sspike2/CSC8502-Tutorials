@@ -3,6 +3,7 @@
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
 	heightMap = new HeightMap(TEXTUREDIR "noise.png");
+	sphere = Mesh::LoadFromMeshFile("Sphere.msh");
 
 	texture = SOIL_load_OGL_texture(
 		TEXTUREDIR "Barren Reds.JPG", SOIL_LOAD_AUTO,
@@ -12,14 +13,13 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		TEXTUREDIR "Barren RedsDOT3.JPG", SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 
-	//shader = new Shader("PerPixelVertex.glsl", "PerPixelFragment.glsl");
-	shader = new Shader("BumpVertex.glsl", "BumpFragment.glsl");
+	shader = new Shader("PerPixelVertex.glsl", "PerPixelFragment.glsl");
+	//shader = new Shader("directionalVertex.glsl", "directionalFragment.glsl");
 
 	if (!shader->LoadSuccess() || !texture || !bumpmap)
 	{
 		return;
 	}
-
 
 
 
@@ -29,10 +29,24 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	Vector3 heightmapSize = heightMap->GetHeightmapSize();
 
 	camera = new Camera(-45.0f, 0.0f,
-		heightmapSize * Vector3(0.5f, 5.0f, 0.5f),50);
-	light = new Light(heightmapSize * Vector3(0.5f, 1.5f, 0.5f),
-		Vector4(1, 1, 0, 1), heightmapSize.x * 0.5f);
+		heightmapSize * Vector3(0.5f, 5.0f, 0.5f),300);
 
+	light = new Light[2];
+
+	for (int i = 0; i < 2; i++)
+	{
+		Light& l = light[i];
+		l.SetPosition(heightmapSize * Vector3(i, 1.5f, 0.5f));
+		l.SetColour(Vector4(1, 1, 1, 1));
+		l.SetRadius(heightmapSize.x * 0.5f);
+	}
+
+	/*light = new Light(heightmapSize * Vector3(0.5f, 1.5f, 0.5f),
+		Vector4(1, 1, 1, 1), heightmapSize.x * 0.5f);
+
+	newLight = new Light(heightmapSize * Vector3(1.0f, 1.5f, 0.5f),
+		Vector4(1, 0, 0, 1), heightmapSize.x * 0.5f);*/
+		
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f,
 		(float)width / (float)height, 45.0f);
 
@@ -71,7 +85,21 @@ void Renderer::RenderScene()
 		"cameraPos"), 1, (float*)&camera->GetPosition());
 
 	UpdateShaderMatrices();
-	SetShaderLight(*light);
+
+	for (int i = 0; i < 2; ++i)
+	{
+		Light& l = light[i];
+		SetShaderLight(l);
+		sphere->Draw();
+	}
+
+
+	//SetShaderLight(*light);
+	//speher
+	//SetShaderLight(*newLight);
+	//Vector3* direction = new Vector3(0, 1, 0);
+	//SetDirectionalLight(direction, light[0]);
+
 
 	heightMap->Draw();
 }

@@ -1,6 +1,7 @@
 # version 330 core
 uniform sampler2D diffuseTex ;
 uniform sampler2D bumpTex ; // New !
+uniform sampler2D emiisionTex;
 
 uniform vec3 cameraPos ;
 uniform vec4 lightColour ;
@@ -28,6 +29,8 @@ in Vertex {
  vec3 bumpNormal = texture ( bumpTex , IN. texCoord ).rgb;
  bumpNormal = normalize (TBN * IN.normal * 2.0 - 1.0);
 
+ vec4 emiss = texture(emiisionTex,IN.texCoord);
+
  float lambert = max (dot ( incident , bumpNormal ), 0.0f);
  float distance = length ( lightPos - IN. worldPos );
  float attenuation = clamp ( distance / lightRadius , 0.0 , 1.0);
@@ -39,4 +42,8 @@ in Vertex {
  fragColour .rgb += ( lightColour .rgb * specFactor )* attenuation *0.33;
  fragColour .rgb += surface * 0.1f;
  fragColour .a = diffuse .a;
+
+ fragColour += emiss;
+
+
  }

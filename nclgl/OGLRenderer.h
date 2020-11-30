@@ -57,13 +57,17 @@ public:
 	void			SwapBuffers();
 
 	bool			HasInitialised() const;	
+
+	bool            SetTextureToShader(GLuint texID, GLuint unit, const std::string& uniformName, Shader* s);
 	
 protected:
 	virtual void	Resize(int x, int y);	
 	void			UpdateShaderMatrices();
 	void			BindShader(Shader*s);
 	void			SetTextureRepeating ( GLuint target , bool state );
+	void            SetTextureRepeating(GLuint target, bool repeating, bool isHorizontalAxis);
 	void            SetShaderLight ( const Light& l);
+	void			SetDirectionalLight(const Vector3* direction,const Light& l);
 
 	void StartDebugGroup(const std::string& s) {
 		glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, (GLsizei)s.length(), s.c_str());
@@ -91,3 +95,7 @@ private:
 	static void CALLBACK DebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 #endif
 };
+
+
+
+

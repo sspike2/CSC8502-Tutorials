@@ -12,6 +12,8 @@ int main() {
 		return -1;
 	}
 
+
+
 	float rotate = 0.0f;
 	float tiling = 0.01f;
 	while(w.UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
@@ -42,6 +44,10 @@ int main() {
 
 		if(Window::GetKeyboard()->KeyTriggered(KEYBOARD_2) ) {
 			renderer.ToggleRepeating();
+		}
+
+		if(Window::GetKeyboard()->KeyTriggered(KEYBOARD_4)) {
+			renderer.ToggleBlendMode();
 		}
 
 		renderer.RenderScene();

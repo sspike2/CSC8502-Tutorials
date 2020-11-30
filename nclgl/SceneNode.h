@@ -50,13 +50,31 @@ public:
 	void SetTexture(GLuint tex) { texture = tex; }
 	GLuint GetTexture() const { return texture; }
 
+
+	void   SetBumpTex(GLuint bump) { bumpTex = bump; }
+	GLuint GetBumpTex() const { return bumpTex; }
+
+	void   SetEmissionTex(GLuint emiis) { emissionTex = emiis; }
+	GLuint GetEmissionTex() const { return emissionTex; }
+
+
+
+
 	static bool CompareByCameraDistance(SceneNode* a, SceneNode* b)
 	{
 		return (a->distanceFromCamera <
 			b->distanceFromCamera) ? true : false;
 	}
 
+	Matrix4 GetTextureMatrix() const
+	{
+		return textureMatrix;
+	}
 
+	void SetTextureMatrix(Matrix4 textureMatrix) 
+	{
+		this->textureMatrix = textureMatrix;
+	}
 
 
 
@@ -73,5 +91,11 @@ protected:
 	std::vector < SceneNode*> children;
 	float distanceFromCamera;
 	float boundingRadius;
+
 	GLuint texture;
+	GLuint bumpTex;
+	GLuint emissionTex;
+
+
+	Matrix4 textureMatrix;
 };

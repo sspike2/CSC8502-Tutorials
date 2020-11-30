@@ -13,10 +13,11 @@ public:
 	void ToggleDepth();
 	void ToggleAlphaBlend();
 	void ToggleBlendMode();
+
 	void MoveObject(float by);
 
 protected:
-	GLuint textures[2];
+	GLuint textures[3];
 	Mesh* meshes[2];
 	Shader* shader;
 	Vector3 positions[2];
