@@ -294,6 +294,35 @@ void OGLRenderer::SetDirectionalLight(const Vector3* direction, const Light& l)
 }
 
 
+void OGLRenderer::SetSpotLight(const Light& l)
+{
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightPos"), 1, (float*)&l.GetPosition());
+
+	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightColour"), 1, (float*)&l.GetColour());
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"lightRadius"), l.GetRadius());
+
+
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(), 
+		"lightDir"), 1, (float*)&l.GetDirection());
+
+	//glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		//"outerCutoff"), l.GetOuterCutoff());
+
+	//glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		//"cutoff"), l.GetCutOff());
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"angle"), l.GetAngle());
+
+
+
+}
+
+
 
 
 

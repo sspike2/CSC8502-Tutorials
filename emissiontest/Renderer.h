@@ -16,10 +16,13 @@ public:
 
 	SceneNode* root = new SceneNode();
 
+	SceneNode* depthTest;
+
 
 	const int numOfBuildings = 1;
 
 protected:
+	void DrawSkybox();
 	void FillBuffers(); //G- Buffer Fill Render Pass
 	void DrawPointLights(); // Lighting Render Pass
 	void CombineBuffers(); // Combination Render Pass
@@ -28,10 +31,14 @@ protected:
 
 	void GenerateBuildings();
 
-
-	Shader* sceneShader; // Shader to fill our GBuffers
+	Shader* sceneShader;      // Shader to fill our GBuffers
 	Shader* pointlightShader; // Shader to calculate lighting
-	Shader* combineShader; // shader to stick it all together
+	Shader* combineShader;    // shader to stick it all together
+	Shader* skyboxShader;     // skybox
+
+	Shader* textureShader;    // depthTest;
+
+
 
 	GLuint bufferFBO; // FBO for our G- Buffer pass
 	GLuint bufferColourTex; // Albedo goes here
@@ -61,7 +68,7 @@ protected:
 	GLuint bumpTex;
 	GLuint emmisTex;
 
-
+	GLuint Skybox;
 
 
 	void BuildNodeLists(SceneNode* from);
@@ -69,6 +76,8 @@ protected:
 	void ClearNodeLists();
 	void DrawNodes();
 	void DrawNode(SceneNode* n);
+
+	void DrawNode(SceneNode* n, bool tex);
 
 
 

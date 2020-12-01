@@ -68,6 +68,7 @@ protected:
 	void            SetTextureRepeating(GLuint target, bool repeating, bool isHorizontalAxis);
 	void            SetShaderLight ( const Light& l);
 	void			SetDirectionalLight(const Vector3* direction,const Light& l);
+	void            SetSpotLight(const Light& l);
 
 	void StartDebugGroup(const std::string& s) {
 		glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, (GLsizei)s.length(), s.c_str());

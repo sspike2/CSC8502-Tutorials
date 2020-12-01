@@ -78,7 +78,7 @@ public:
 
 
 
-
+	char* name;
 
 
 protected:

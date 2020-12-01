@@ -62,6 +62,8 @@ void main() {
     vec4 diffuse = texture ( diffuseTex , IN. texCoord );
     vec3 bumpNormal = texture ( bumpTex , IN. texCoord ).rgb;
     bumpNormal = normalize (TBN * IN.normal * 2.0 - 1.0);
+
+    // float reflec
     
    // float lambert = max (dot ( incident , bumpNormal ),1.0f);
     

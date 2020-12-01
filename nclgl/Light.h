@@ -25,8 +25,28 @@ public:
 	Vector4 GetColour() const                  { return colour; }
 	void SetColour(const Vector4& val)         { colour = val; }
 
+
+	Vector3 GetDirection() const               { return direction; }
+	void SetDirection(const Vector3& dir)      { direction = dir; }
+
+	float GetOuterCutoff() const               { return outerCutoff; }
+	void  SetOuterCutoff(float val)            { outerCutoff = val; }
+
+	float GetCutOff() const                    { return cutOff; }
+	void  SetCutOff(float val)                 { cutOff = val; }
+
+	float GetAngle() const                    { return angle; }
+	void  SetAngle(float val)                 { angle = val; }
+
+
 protected:
 	Vector3 position;
 	float radius;
 	Vector4 colour;
+
+	Vector3 direction;
+	float outerCutoff;
+	float cutOff;
+	float angle;
+
 };

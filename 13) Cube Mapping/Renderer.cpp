@@ -18,8 +18,16 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		TEXTUREDIR"Barren RedsDOT3.JPG", SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 
-	cubeMap = SOIL_load_OGL_single_cubemap(TEXTUREDIR "skybox.png", "NSWEUD", SOIL_LOAD_RGB, 
-	SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
+	//cubeMap = SOIL_load_OGL_single_cubemap(TEXTUREDIR "skybox.png", "NSWEUD", SOIL_LOAD_RGB, 
+	//SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
+
+
+	cubeMap = SOIL_load_OGL_cubemap(
+		TEXTUREDIR"/Sush/skybox/S2.png", TEXTUREDIR"/Sush/skybox/N2.png",
+		TEXTUREDIR"/Sush/skybox/U2.png", TEXTUREDIR"/Sush/skybox/D2.png",
+		TEXTUREDIR"/Sush/skybox/E2.png", TEXTUREDIR"/Sush/skybox/W2.png",
+		SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
+
 	
 	/*cubeMap = SOIL_load_OGL_cubemap(
 		TEXTUREDIR"rusted_west.jpg", TEXTUREDIR"rusted_east.jpg",
@@ -40,6 +48,9 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		"skyboxVertex.glsl","skyboxFragment.glsl");
 	lightShader = new Shader(
 		"PerPixelVertex.glsl","PerPixelFragment.glsl");
+
+
+
 
 	if (!reflectShader->LoadSuccess() ||
 		!skyboxShader->LoadSuccess() ||

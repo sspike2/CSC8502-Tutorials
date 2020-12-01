@@ -5,7 +5,7 @@
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
 	camera = new Camera(-30.0f, 315.0f, Vector3(-8.0f, 5.0f, 8.0f), 10);
-	light = new Light(Vector3(-20.0f, 10.0f, -20.0f),
+	light = new Light(Vector3(0.0f, 10.0f, 0.0f),
 		Vector4(1, 1, 1, 1), 250.0f);
 	sceneShader = new Shader("shadowscenevert.glsl", "shadowscenefrag.glsl");
 	shadowShader = new Shader("shadowVert.glsl", "shadowFrag.glsl");
@@ -41,6 +41,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	sceneDiffuse = SOIL_load_OGL_texture(TEXTUREDIR"Barren Reds.JPG",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	sceneBump = SOIL_load_OGL_texture(TEXTUREDIR"Barren RedsDOT3.JPG",
+
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	SetTextureRepeating(sceneDiffuse, true);
 	SetTextureRepeating(sceneBump, true);
@@ -71,12 +72,14 @@ void Renderer::UpdateScene(float dt)
 	camera->UpdateCamera(dt);
 	sceneTime += dt;
 
-	for (int i = 1; i < 4; ++i)
-	{ // skip the floor !
-		Vector3 t = Vector3(-10 + (5 * i), 2.0f + sin(sceneTime * i), 0);
-		sceneTransforms[i] = Matrix4::Translation(t) *
-			Matrix4::Rotation(sceneTime * 10 * i, Vector3(1, 0, 0));
-	}
+	sceneTransforms[2] = Matrix4::Translation(Vector3(0, 5, 0));
+
+	//for (int i = 1; i < 4; ++i)
+	//{ // skip the floor !
+	//	Vector3 t = Vector3(-10 + (5 * i), 2.0f + sin(sceneTime * i), 0);
+	//	sceneTransforms[i] = Matrix4::Translation(t) *
+	//		Matrix4::Rotation(sceneTime * 10 * i, Vector3(1, 0, 0));
+	//}
 }
 void Renderer::RenderScene()
 {

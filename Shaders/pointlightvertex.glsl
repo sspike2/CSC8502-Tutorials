@@ -6,7 +6,7 @@ uniform mat4 projMatrix ;
 
 in vec3 position ;
 
-uniform float lightRadius ;
+ uniform float lightRadius ;
  uniform vec3 lightPos ;
  uniform vec4 lightColour ;
 

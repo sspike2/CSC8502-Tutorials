@@ -27,6 +27,12 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 
 
+	Skybox = SOIL_load_OGL_cubemap(
+		TEXTUREDIR"/Sush/skybox/S.png", TEXTUREDIR"/Sush/skybox/N.png",
+		TEXTUREDIR"/Sush/skybox/U.png", TEXTUREDIR"/Sush/skybox/D.png",
+		TEXTUREDIR"/Sush/skybox/E.png", TEXTUREDIR"/Sush/skybox/W.png",
+		SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
+
 	//buildings ;
 
 
@@ -38,7 +44,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	SetTextureRepeating(buildingTex, true);
 	SetTextureRepeating(buildingemmis, true);
 
-	camera = new Camera(0.0f, -90.0f, (Vector3(0, 300, 750.0f)), 600);
+	camera = new Camera(0.0f, -90.0f, (Vector3(0, 300, 750.0f)), 3000);
 
 
 
@@ -58,14 +64,6 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		l.SetRadius(250.0f + (rand() % 250));
 	}
 
-	//Light& l = pointLights[LIGHT_NUM - 1];
-	//l.SetPosition(Vector3(0, 1000.0f, 0));
-
-	//l.SetColour(Vector4(1, 0, 0, 1));
-	//l.SetRadius(10000.0f);
-
-
-
 
 
 
@@ -76,12 +74,19 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		"pointlightfragment.glsl");
 	combineShader = new Shader("combinevert.glsl",
 		"combinefrag.glsl");
+	skyboxShader = new Shader(
+		"skyboxVertex.glsl", "skyboxFragment.glsl");
 
-	bool scene, point, combine;
+	textureShader
+		= new Shader("TexturedVertex.glsl", "texturedfragment.glsl");
+
+
+	bool scene, point, combine, sky;
 	scene = sceneShader->LoadSuccess();
 	point = pointlightShader->LoadSuccess();
 	combine = combineShader->LoadSuccess();
-	if (!scene || !point || !combine)
+	sky = skyboxShader->LoadSuccess();
+	if (!scene || !point || !combine || !sky)
 	{
 		return;
 	}
@@ -109,6 +114,36 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		* Matrix4::Rotation(90, Vector3(0, 0, 1))
 	);
 	root->AddChild(s);
+
+
+
+	//depthTest = new SceneNode();
+	//depthTest->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1));
+	//depthTest->SetTransform(Matrix4::Translation(Vector3(0, 00, -100.0f))
+	//	//*		Matrix4::Rotation(-90, Vector3(1, 0, 0))
+	//	//s->SetTransform(Matrix4::Rotation(-90, Vector3(0, 0, 1))
+	//);
+	//depthTest->SetModelScale(Vector3(10000.0f, 10000.0f, 10000.0f));
+	////s->SetBoundingRadius(100.0f);
+	//depthTest->SetMesh(cube);
+	//depthTest->SetTexture(buildingTex);
+	//depthTest->name = "depth";
+	//s->SetBumpTex(earthBump);
+
+	//s->SetTextureMatrix(Matrix4::Scale(Vector3(10, 10, 1))
+	//* Matrix4::Translation(Vector3(0.5f, 0.5f, 0))
+	//* Matrix4::Rotation(90, Vector3(0, 0, 1))
+	//);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -165,6 +200,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
 	init = true;
 }
@@ -206,6 +242,29 @@ void Renderer::GenerateScreenTexture(GLuint& into, bool depth)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+
+void Renderer::DrawSkybox()
+{
+	glDepthMask(GL_FALSE);
+
+	BindShader(skyboxShader);
+	UpdateShaderMatrices();
+
+	quad->Draw();
+
+	glDepthMask(GL_TRUE);
+}
+
+
+
+
+
+
+
+
+
+
 void Renderer::UpdateScene(float dt)
 {
 	camera->UpdateCamera(dt);
@@ -230,11 +289,16 @@ void Renderer::RenderScene()
 
 
 
+
+
 }
 void Renderer::FillBuffers()
 {
+
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+	DrawSkybox();
 
 	BindShader(sceneShader);
 
@@ -315,28 +379,39 @@ void Renderer::DrawPointLights()
 }
 void Renderer::CombineBuffers()
 {
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+
 	BindShader(combineShader);
 	modelMatrix.ToIdentity();
 	viewMatrix.ToIdentity();
 	projMatrix.ToIdentity();
 	UpdateShaderMatrices();
 
-	glUniform1i(glGetUniformLocation(
+	SetTextureToShader(bufferColourTex, 0, "diffuseTex", combineShader);
+	SetTextureToShader(lightDiffuseTex, 1, "diffuseLight", combineShader);
+	SetTextureToShader(bufferEmissionTex, 2, "emissionTex", combineShader);
+	SetTextureToShader(lightSpecularTex, 3, "specularLight", combineShader);
+	//SetTextureToShader(bufferDepthTex, 4, "depthTex", combineShader);
+
+	//SetTextureToShader(buff)
+
+
+
+	/*glUniform1i(glGetUniformLocation(
 		combineShader->GetProgram(), "diffuseTex"), 0);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, bufferColourTex);
+	glBindTexture(GL_TEXTURE_2D, bufferColourTex);*/
 
-	glUniform1i(glGetUniformLocation(
+	/*glUniform1i(glGetUniformLocation(
 		combineShader->GetProgram(), "diffuseLight"), 1);
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, lightDiffuseTex);
+	glBindTexture(GL_TEXTURE_2D, lightDiffuseTex);*/
 
-	SetTextureToShader(bufferEmissionTex, 2, "emissionTex", combineShader);
 
-	glUniform1i(glGetUniformLocation(
+	/*glUniform1i(glGetUniformLocation(
 		combineShader->GetProgram(), "specularLight"), 3);
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, lightSpecularTex);
+	glBindTexture(GL_TEXTURE_2D, lightSpecularTex);*/
 
 
 
@@ -344,6 +419,28 @@ void Renderer::CombineBuffers()
 		//"emissionColor"), 1, (float*)&emissionColor);
 
 	quad->Draw();
+
+
+
+	/*BindShader(textureShader);
+	modelMatrix.ToIdentity();
+	viewMatrix.ToIdentity();
+	projMatrix.ToIdentity();
+	UpdateShaderMatrices();*/
+
+	/*glUniform1i(glGetUniformLocation(
+		combineShader->GetProgram(), "diffuseTex"), 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, buildingTex);
+
+	DrawNode(depthTest, true);*/
+
+
+
+
+
+
+
 }
 
 void Renderer::BuildNodeLists(SceneNode* from)
@@ -407,7 +504,10 @@ void Renderer::DrawNode(SceneNode* n)
 	if (n->GetMesh())
 	{
 
-
+		if (n->name == "depth")
+		{
+			bool a = true;
+		}
 
 		tex = n->GetTexture();
 		SetTextureToShader(tex, 0, "diffuseTex", sceneShader);
@@ -442,6 +542,45 @@ void Renderer::DrawNode(SceneNode* n)
 
 
 
+
+		n->Draw(*this);
+
+	}
+}
+
+void Renderer::DrawNode(SceneNode* n, bool tex)
+{
+	if (n->GetMesh())
+	{
+
+		if (n->name == "depth")
+		{
+			bool a = true;
+		}
+
+		tex = n->GetTexture();
+		SetTextureToShader(tex, 0, "diffuseTex", textureShader);
+
+		/*	bumpTex = n->GetBumpTex();
+			SetTextureToShader(bumpTex, 1, "bumpTex", textureShader);
+
+			emmisTex = n->GetEmissionTex();
+			SetTextureToShader(emmisTex, 2, "emiisionTex", textureShader);
+
+			glUniform4fv(glGetUniformLocation(textureShader->GetProgram(),
+				"emissionColor"), 1, (float*)&emissionColor);*/
+
+
+		Matrix4 model = n->GetWorldTransform() *
+			Matrix4::Scale(n->GetModelScale());
+		glUniformMatrix4fv(glGetUniformLocation(textureShader->GetProgram(),
+			"modelMatrix"), 1, false, model.values);
+
+		glUniform4fv(glGetUniformLocation(textureShader->GetProgram(),
+			"nodeColour"), 1, (float*)&n->GetColour());
+
+		glUniformMatrix4fv(glGetUniformLocation(textureShader->GetProgram(), "textureMatrix"),
+			1, false, n->GetTextureMatrix().values);
 
 		n->Draw(*this);
 

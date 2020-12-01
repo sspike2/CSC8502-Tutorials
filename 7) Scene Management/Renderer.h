@@ -3,10 +3,8 @@
 # include "../nclgl/OGLRenderer.h"
 # include "../nclgl/SceneNode.h"
 # include "../nclgl/Frustum.h"
-class Camera;
-class SceneNode;
-class Mesh;
-class Shader;
+# include "../nclgl/Camera.h"
+
 
 class Renderer : public OGLRenderer
 {
@@ -30,8 +28,9 @@ protected:
 	Mesh* cube;
 	Shader* shader;
 	GLuint texture;
+	GLuint texture2;
 
-	Frustum frameFrustum;
+	//Frustum frameFrustum;
 
 	vector < SceneNode*> transparentNodeList;
 	vector < SceneNode*> nodeList;

@@ -22,6 +22,8 @@ protected:
 	Shader* reflectShader;
 	Shader* skyboxShader;
 
+	Shader* textureShader;
+
 	HeightMap* heightMap;
 	Mesh* quad;
 

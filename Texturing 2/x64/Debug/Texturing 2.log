@@ -1,0 +1,17 @@
+﻿  Renderer.cpp
+D:\cpp projects\CSC8502-Tutorials\nclgl\Window.h(47,1): error C2664: 'BOOL SetWindowTextW(HWND,LPCWSTR)': cannot convert argument 2 from 'const _Elem *' to 'LPCWSTR'
+          with
+          [
+              _Elem=char
+          ]
+D:\cpp projects\CSC8502-Tutorials\nclgl\Window.h(47,48): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(8902,1): message : see declaration of 'SetWindowTextW'
+  Source.cpp
+D:\cpp projects\CSC8502-Tutorials\nclGL\window.h(47,1): error C2664: 'BOOL SetWindowTextW(HWND,LPCWSTR)': cannot convert argument 2 from 'const _Elem *' to 'LPCWSTR'
+          with
+          [
+              _Elem=char
+          ]
+D:\cpp projects\CSC8502-Tutorials\nclGL\window.h(47,48): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(8902,1): message : see declaration of 'SetWindowTextW'
+  Generating Code...
