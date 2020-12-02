@@ -53,6 +53,11 @@ protected:
 	GLuint pointLightFBO; // FBO for our lighting pass
 	GLuint lightDiffuseTex; // Store diffuse lighting
 	GLuint lightSpecularTex; // Store specular lighting
+
+
+
+
+
 	Light* pointLights; // Array of lighting data
 	Mesh* sphere; // Light volume
 	Mesh* quad; // To draw a full - screen quad

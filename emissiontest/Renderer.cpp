@@ -77,8 +77,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	skyboxShader = new Shader(
 		"skyboxVertex.glsl", "skyboxFragment.glsl");
 
-	textureShader
-		= new Shader("TexturedVertex.glsl", "texturedfragment.glsl");
+	textureShader = new Shader("TexturedVertex.glsl", "texturedfragment.glsl");
 
 
 	bool scene, point, combine, sky;
@@ -166,6 +165,7 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 	GenerateScreenTexture(bufferEmissionTex);
 	GenerateScreenTexture(lightDiffuseTex);
 	GenerateScreenTexture(lightSpecularTex);
+
 	// And now attach them to our FBOs
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
@@ -196,11 +196,17 @@ Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 		return;
 	}
 
+
+
+
+
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+
+
 
 	init = true;
 }
@@ -300,12 +306,14 @@ void Renderer::FillBuffers()
 
 	DrawSkybox();
 
+
 	BindShader(sceneShader);
 
 	modelMatrix.ToIdentity();
 	viewMatrix = camera->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 1000000.0f,
+	projMatrix = Matrix4::Perspective(1.0f, 100000.0f,
 		(float)width / (float)height, 45.0f);
+
 
 
 	UpdateShaderMatrices();
@@ -325,7 +333,8 @@ void Renderer::FillBuffers()
 	glBindTexture(GL_TEXTURE_2D, earthBump);
 	*/
 	//heightMap->Draw();
-
+	glDepthMask(GL_TRUE);
+	glDepthFunc(GL_LEQUAL);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 void Renderer::DrawPointLights()
@@ -370,28 +379,48 @@ void Renderer::DrawPointLights()
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glCullFace(GL_BACK);
+
+
 	glDepthFunc(GL_LEQUAL);
-
 	glDepthMask(GL_TRUE);
-
 	glClearColor(0.2f, 0.2f, 0.2f, 1);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 void Renderer::CombineBuffers()
 {
+	//glBlitFramebuffer(bufferFBO,);
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, bufferFBO);
 	//glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
-
+	//glBindFramebuffer(GL_FRAMEBUFFER, combineFBO);
 	BindShader(combineShader);
 	modelMatrix.ToIdentity();
 	viewMatrix.ToIdentity();
 	projMatrix.ToIdentity();
 	UpdateShaderMatrices();
 
+	//glGetTexImage(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, GL_FLOAT, &bufferDepthTex);
+
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
+		//GL_TEXTURE_2D, bufferDepthTex, 0);
+
 	SetTextureToShader(bufferColourTex, 0, "diffuseTex", combineShader);
 	SetTextureToShader(lightDiffuseTex, 1, "diffuseLight", combineShader);
 	SetTextureToShader(bufferEmissionTex, 2, "emissionTex", combineShader);
 	SetTextureToShader(lightSpecularTex, 3, "specularLight", combineShader);
-	//SetTextureToShader(bufferDepthTex, 4, "depthTex", combineShader);
+
+
+	glUniform1i(glGetUniformLocation(
+		combineShader->GetProgram(), "depthTex"), 4);
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, bufferDepthTex);
+
+
+	glUniform4fv(glGetUniformLocation(sceneShader->GetProgram(),
+		"fogcolor"), 1, (float*)&Vector4(1, 0, 0, 1));
+
+
+	//SetTextureToShader(bufferColourTex, 4, "depthTex", combineShader);
+	//glBindTexture(GL_TEXTURE_2D, bufferDepthTex);
 
 	//SetTextureToShader(buff)
 
@@ -437,7 +466,7 @@ void Renderer::CombineBuffers()
 
 
 
-
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 
 

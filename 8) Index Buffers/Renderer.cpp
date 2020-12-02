@@ -3,9 +3,9 @@
 Renderer::Renderer(Window& parent) : OGLRenderer(parent)
 {
 	heightMap = new HeightMap(TEXTUREDIR "noise.png");
-	camera = new Camera(-40, 270, Vector3(-2100, 3300, 2000),50);
+	camera = new Camera(-40, 270, Vector3(-2100, 3300, 2000), 300);
 
-	shader = new Shader("TexturedVertex.glsl", "TexturedFragment.glsl");
+	shader = new Shader("TexturedVertex(3).glsl", "TexturedFragment(3).glsl");
 
 	Vector3 dimensions = heightMap->GetHeightmapSize();
 	camera->SetPosition(dimensions * Vector3(0.5, 2, 0.5));
@@ -53,6 +53,27 @@ void Renderer::RenderScene()
 	UpdateShaderMatrices();
 
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+
+	//gluniform1f(glGetUniformLocation(currentShader->GetProgram(),))
+
+	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(),
+		"fogcolor"), 1, (float*)&Vector4(1,0, 0, 1));
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"linearStart"), 500.0f);
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"linearEnd"), 5000.0f);
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"density"), 00.0002f);
+
+	curTime = time(0);
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"time"), curTime);
+
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, terrainTex);
 	heightMap->Draw();
